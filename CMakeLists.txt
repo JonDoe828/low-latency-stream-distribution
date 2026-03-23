@@ -58,6 +58,27 @@ set_target_properties(stream_relay_server PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin
 )
 
+add_executable(publisher_client
+    examples/publisher_client.cpp
+    ${BASE_SRC}
+    ${NET_SRC}
+    ${PROTOCOL_SRC}
+)
+
+add_executable(subscriber_client
+    examples/subscriber_client.cpp
+    ${BASE_SRC}
+    ${NET_SRC}
+    ${PROTOCOL_SRC}
+)
+
+target_link_libraries(publisher_client PRIVATE Threads::Threads)
+target_link_libraries(subscriber_client PRIVATE Threads::Threads)
+
+set_target_properties(publisher_client subscriber_client PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin
+)
+
 # -------------------------
 # Catch2 tests
 # -------------------------
